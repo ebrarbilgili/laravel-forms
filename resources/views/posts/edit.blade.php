@@ -15,7 +15,7 @@
     {!! Form::button('<span class="fas fa-edit"></span>', ['type' => 'submit', 'class' => 'btn btn-primary', 'value' => 'UPDATE']) !!}
     {!! Form::close() !!}
 
-    {!! Form::open(['method' => 'DELETE','style' => 'display:inline-block', 'action' => ['App\Http\Controllers\PostController@destroy', $post->id]]) !!}
+    {!! Form::open(['method' => 'DELETE', 'style' => 'display:inline-block', 'action' => ['App\Http\Controllers\PostController@destroy', $post->id]]) !!}
     {!! Form::button('<span class="fas fa-trash"></span>', ['type' => 'submit', 'value' => 'DELETE', 'class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 
