@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    public $directory = '/files/';
     use HasFactory;
-    
+
     protected $fillable = [
-        'title','content'
+        'title', 'content', 'path'
     ];
 
     public function post()

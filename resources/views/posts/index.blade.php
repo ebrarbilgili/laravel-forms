@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Posts</h1>
+    <h1>Posts</h1>
     <a class="btn btn-primary" href="/posts/create">Create</a>
     <ul>
         @foreach ($posts as $post)
             <li><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }} ,
                     {{ $post->content == null ? 'null' : $post->content }} ({{ $post->id }})</a>
+                <a href="http://localhost:8000/files/{{ $post->path }}">Show Image</a>
+
+                    <img height="40" src="files/{{ $post->path }}" alt="">
+
                 <form style='display:inline-block;' method="POST" action="">
                     <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}" value="POST" type="button"><span
                             class="fas fa-edit"></span></a>

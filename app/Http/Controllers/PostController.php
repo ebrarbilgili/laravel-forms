@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -34,10 +36,29 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        Post::create($request->all());
+        // $file = $request->file('file');
+        // echo '<br>';
+        // echo $file->getClientOriginalName();
+        // echo '<br>';
+        // echo $file->getSize();
+
+        $input = $request->all();
+
+        if ($file = $request->file('file')) {
+            $name = $file->getClientOriginalName();
+            $file->move('files', $name);
+            $input['path'] = $name;
+        }
+
+        $this->validate($request, ['title' => "required", 'content' => 'required']);
+        Post::create($input);
         return redirect('/posts');
+
+        // Post::create($request->all());
+
+
         // return $request->all(); 
 
         // $input = $request->all();
@@ -79,7 +100,8 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        $post->update($request->all());
+        $input = $request->all();
+        $post->update($input);
 
         return redirect('/posts');
     }

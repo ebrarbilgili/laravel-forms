@@ -3,13 +3,18 @@
 @section('content')
     <h1>Edit Posts</h1>
 
-    {!! Form::open(['method' => 'PUT', 'style' => 'display:inline', 'action' => ['App\Http\Controllers\PostController@update', $post->id]]) !!}
+    {!! Form::open(['method' => 'PUT', 'enctype' => 'multipart/form-data', 'style' => 'display:inline', 'action' => ['App\Http\Controllers\PostController@update', $post->id]]) !!}
     <div class="form-group">
         {!! Form::label('title', 'Title:') !!}
-        {!! Form::text('title', null, ['class' => 'form-control']) !!}
+        {!! Form::text('title', $post->title, ['class' => 'form-control']) !!}
 
         {!! Form::label('content', 'Content:') !!}
-        {!! Form::text('content', null, ['class' => 'form-control']) !!}
+        {!! Form::text('content', $post->content, ['class' => 'form-control']) !!}
+        <br>
+        {!! Form::file('file', ['class' => 'form-control']) !!}
+        {!! Form::label('file', $post->path) !!}
+        <br>
+        <img height="40" src="/files/{{ $post->path }}" alt="">
     </div>
     <br>
     {!! Form::button('<span class="fas fa-edit"></span>', ['type' => 'submit', 'class' => 'btn btn-primary', 'value' => 'UPDATE']) !!}
