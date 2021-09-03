@@ -7,7 +7,7 @@
         @foreach ($posts as $post)
             <li><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }} ,
                     {{ $post->content == null ? 'null' : $post->content }} ({{ $post->id }})</a>
-                <a href="{!! url('/files/{$post->path}') !!}">Show Image</a>
+                <a href="/files/{{ $post->path }}">Show Image</a>
                 <img height="40" src="files/{{ $post->path }}" alt="">
 
                 <form style='display:inline-block;' method="POST" action="">
